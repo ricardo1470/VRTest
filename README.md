@@ -3,7 +3,7 @@
 ## Descripción General
 Este proyecto implementa una experiencia de realidad virtual multijugador desarrollada en Unity 6, que permite a los usuarios interactuar en un entorno compartido a través de portales y objetos físicos dinámicos, utilizando dispositivos Meta Quest/Pico.
 
-![Vista general del proyecto](imagen_general.png)
+<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/7.png" align="middle" width="desired width" height="desired heigh"></a>
 
 ## Arquitectura General
 
@@ -22,7 +22,6 @@ Este proyecto implementa una experiencia de realidad virtual multijugador desarr
 #### Elección de Netcode
 Se seleccionó Unity Netcode for GameObjects como solución de red por su integración nativa con el ecosistema Unity, documentación actualizada y soporte oficial. Consideramos Mirror como alternativa, pero la integración más estrecha de Netcode con los sistemas modernos de Unity 6 fue el factor determinante.
 
-![Sistema de red en funcionamiento](imagen_network.png)
 
 #### Modelo Host/Cliente
 - Implementación de un sistema de conexión local que no requiere servidores externos
@@ -43,7 +42,7 @@ Se encontraron desafíos en la integración de RPM con Netcode:
 - Sistema de interacción mediante rayos y agarre directo
 - Implementación de teleportación como método alternativo de movimiento
 
-![Interacción en VR](imagen_interaccion_vr.png)
+<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/2.png" align="middle" width="desired width" height="desired heigh"></a>
 
 #### Final IK
 - Implementación para mapeo de movimientos del usuario al avatar
@@ -57,7 +56,7 @@ Los portales funcionan como puntos de teletransporte entre diferentes áreas de 
 - Sistema de "cooling down" para evitar teleportaciones rápidas consecutivas
 - Sincronización en red del estado del portal y teletransporte de jugadores
 
-![Portal en funcionamiento](imagen_portal.png)
+<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/1.png" align="middle" width="desired width" height="desired heigh"></a>
 
 ### Física de Objetos
 
@@ -78,7 +77,7 @@ Se implementaron tres tipos de objetos con comportamientos físicos distintos:
    - Uso de HingeJoint para restricción de movimiento
    - Sincronización utilizando NetworkTransform y NetworkRigidbody
 
-![Objetos interactivos](imagen_objetos.png)
+<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/4.png" align="middle" width="desired width" height="desired heigh"></a>
 
 ### Sistema de UI
 
@@ -87,14 +86,14 @@ Se implementaron tres tipos de objetos con comportamientos físicos distintos:
 - Diseño adaptado para interacción en VR mediante puntero láser
 - Posicionamiento en el espacio para fácil acceso
 
-![Menú de conexión](imagen_menu_conexion.png)
+<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/3.png" align="middle" width="desired width" height="desired heigh"></a>
 
 #### Sistema de Addressables
 - Interfaz para carga dinámica de assets en tiempo de ejecución
 - Monitoreo de FPS en tiempo real
 - Opciones para cargar múltiples instancias (10, 100, 1000) para pruebas de rendimiento
 
-![Interfaz de Addressables](imagen_addressables.png)
+<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/2.png" align="middle" width="desired width" height="desired heigh"></a>
 
 ## Optimizaciones Implementadas
 
