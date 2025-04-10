@@ -1,209 +1,249 @@
-# Experiencia de Realidad Virtual Multijugador
 
-## Descripción General
-Este proyecto implementa una experiencia de realidad virtual multijugador desarrollada en Unity 6, que permite a los usuarios interactuar en un entorno compartido a través de portales y objetos físicos dinámicos, utilizando dispositivos Meta Quest/Pico.
+# 🕶️ Experiencia de Realidad Virtual Multijugador
 
-<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/7.png" align="middle" width="desired width" height="desired heigh"></a>
+Este proyecto implementa una experiencia de realidad virtual multijugador desarrollada en Unity 6, que permite a los usuarios interactuar en un entorno compartido a través de portales y objetos físicos dinámicos, utilizando dispositivos **Meta Quest/Pico**.
 
-## Arquitectura General
+<p align="center">
+  <img src="https://github.com/ricardo1470/VRTest/blob/main/img/7.png" width="80%" />
+</p>
+
+---
+
+## 📌 Tabla de Contenido
+
+1. [Descripción General](#descripción-general)
+2. [Arquitectura General](#arquitectura-general)
+   - [Tecnologías Utilizadas](#tecnologías-utilizadas)
+   - [Decisiones de Diseño](#decisiones-de-diseño)
+3. [Mecánicas y Funcionalidades](#mecánicas-y-funcionalidades)
+   - [Sistema de Interacción en VR](#sistema-de-interacción-en-vr)
+   - [Sistema de Portales](#mecánica-creativa-sistema-de-portales)
+   - [Física de Objetos](#física-de-objetos)
+   - [Sistema de UI](#sistema-de-ui)
+4. [Optimizaciones Implementadas](#optimizaciones-implementadas)
+5. [Pruebas y Validación](#pruebas-y-validación)
+6. [Desafíos y Soluciones](#desafíos-y-soluciones)
+7. [Conclusiones y Trabajo Futuro](#conclusiones-y-trabajo-futuro)
+8. [Instalación y Ejecución](#instalación-y-ejecución)
+9. [Contacto](#contact-💬)
+
+---
+
+## 📖 Descripción General
+
+El entorno multijugador de VR desarrollado permite:
+
+- Conexión en red local entre dispositivos
+- Sincronización de avatares personalizados
+- Interacción física con objetos dinámicos
+- Teleportación mediante portales sincronizados
+- Carga dinámica de assets en tiempo real
+
+---
+
+## 🏗️ Arquitectura General
 
 ### Tecnologías Utilizadas
-- **Motor**: Unity 6 con Universal Render Pipeline (URP)
+
+- **Motor**: Unity 6 + Universal Render Pipeline (URP)
 - **Networking**: Unity Netcode for GameObjects
-- **VR**: XR Toolkit y Open XR
-- **Avatar**: Ready Player Me (RPM)
-- **Rigging**: Final IK para control de avatar en VR
-- **Optimización**: Addressables para carga dinámica de assets
+- **VR Framework**: XR Toolkit y Open XR
+- **Avatares**: Ready Player Me (RPM)
+- **Rigging**: Final IK
+- **Assets**: Addressables
 
-## Decisiones de Diseño
+---
 
-### Sistema de Red
+## 🧠 Decisiones de Diseño
 
-#### Elección de Netcode
-Se seleccionó Unity Netcode for GameObjects como solución de red por su integración nativa con el ecosistema Unity, documentación actualizada y soporte oficial. Consideramos Mirror como alternativa, pero la integración más estrecha de Netcode con los sistemas modernos de Unity 6 fue el factor determinante.
+### 🔌 Sistema de Red
 
+#### Netcode
+- Elección: **Unity Netcode for GameObjects**
+- Justificación: integración nativa con Unity 6, soporte oficial, documentación activa.
 
 #### Modelo Host/Cliente
-- Implementación de un sistema de conexión local que no requiere servidores externos
-- UI intuitiva para selección de rol (Host/Cliente)
-- Validación de IP con formato estricto (192.168.x.x)
-- Manejo de errores con feedback visual al usuario
+- Conexión local (sin servidores externos)
+- Interfaz intuitiva para elección de rol
+- Validación IP estricta (`192.168.x.x`)
+- Manejo visual de errores
 
-#### Sincronización de Avatares
-Se encontraron desafíos en la integración de RPM con Netcode:
-- Problema: Los huesos del avatar no se sincronizaban correctamente en la red
-- Solución parcial: Implementación de NetworkTransform para componentes clave
-- Estado actual: Funcionalidad básica operativa con oportunidades de mejora
+#### Sincronización de Avatares RPM
+- Problema: huesos no sincronizados correctamente
+- Solución: uso de `NetworkTransform` en componentes clave
+- Estado actual: funcional, con margen de mejora
+
+---
+
+## 🕹️ Mecánicas y Funcionalidades
 
 ### Sistema de Interacción en VR
 
-#### XR Toolkit
-- Configuración del XR Origin con Action-Based Continuous Move Provider
-- Sistema de interacción mediante rayos y agarre directo
-- Implementación de teleportación como método alternativo de movimiento
+- Uso de XR Origin con *Action-Based Move Provider*
+- Ray interactor y agarre directo
+- Teleportation System integrado
 
-<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/2.png" align="middle" width="desired width" height="desired heigh"></a>
+<p align="center">
+  <img src="https://github.com/ricardo1470/VRTest/blob/main/img/2.png" width="80%" />
+</p>
 
-#### Final IK
-- Implementación para mapeo de movimientos del usuario al avatar
-- Calibración automática basada en altura del usuario
-- Sincronización de gestos y postura
+### Final IK
+
+- Mapeo completo del usuario al avatar
+- Calibración automática según altura
+- Gestos y posturas sincronizadas
+
+---
 
 ### Mecánica Creativa: Sistema de Portales
 
-Los portales funcionan como puntos de teletransporte entre diferentes áreas de la escena:
-- Efecto visual de partículas azul/violeta para indicar entradas/salidas
-- Sistema de "cooling down" para evitar teleportaciones rápidas consecutivas
-- Sincronización en red del estado del portal y teletransporte de jugadores
+- Teletransporte entre zonas de la escena
+- Efectos visuales (partículas azul/violeta)
+- Cooldown para evitar abusos
+- Sincronización total entre jugadores
 
-<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/1.png" align="middle" width="desired width" height="desired heigh"></a>
+<p align="center">
+  <img src="https://github.com/ricardo1470/VRTest/blob/main/img/1.png" width="80%" />
+</p>
+
+---
 
 ### Física de Objetos
 
-Se implementaron tres tipos de objetos con comportamientos físicos distintos:
+1. **Objeto con Rigidbody**
+   - Colisiones reales (`Physics.Simulate`)
+   - Sincronización con `NetworkRigidbody`
 
-1. **Objeto con Rigidbody y gravedad**
-   - Colisiones precisas mediante Physics.Simulate
-   - Comportamiento físico realista
-   - Sincronización en red mediante NetworkRigidbody
+2. **Objeto Cinemático**
+   - Activado por triggers (ej: plataformas móviles)
+   - Movimiento determinista sincronizado
 
-2. **Objeto cinemático controlado por triggers**
-   - Ejemplo: plataforma móvil que se activa al ser pisada
-   - Movimiento determinista controlado por código
-   - Sincronización mediante NetworkTransform
+3. **Objeto con Constraints**
+   - Ejemplo: puerta giratoria
+   - Uso de `HingeJoint`
+   - Sincronización híbrida (`NetworkTransform` + `NetworkRigidbody`)
 
-3. **Objeto dinámico con constraints**
-   - Ejemplo: puerta giratoria con límites de rotación
-   - Uso de HingeJoint para restricción de movimiento
-   - Sincronización utilizando NetworkTransform y NetworkRigidbody
+<p align="center">
+  <img src="https://github.com/ricardo1470/VRTest/blob/main/img/4.png" width="80%" />
+</p>
 
-<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/4.png" align="middle" width="desired width" height="desired heigh"></a>
+---
 
 ### Sistema de UI
 
 #### Menú de Conexión
-- Interfaz minimalista con tres opciones: Host, Cliente, Test IP
-- Diseño adaptado para interacción en VR mediante puntero láser
-- Posicionamiento en el espacio para fácil acceso
+- Opciones: Host / Cliente / Test IP
+- Compatible con puntero láser
+- Espacialmente colocado para VR
 
-<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/3.png" align="middle" width="desired width" height="desired heigh"></a>
+<p align="center">
+  <img src="https://github.com/ricardo1470/VRTest/blob/main/img/3.png" width="80%" />
+</p>
 
-#### Sistema de Addressables
-- Interfaz para carga dinámica de assets en tiempo de ejecución
-- Monitoreo de FPS en tiempo real
-- Opciones para cargar múltiples instancias (10, 100, 1000) para pruebas de rendimiento
+#### Addressables
+- Carga de objetos a demanda
+- Botones para 10 / 100 / 1000 instancias
+- Monitoreo de FPS en vivo
 
-<a href="Vista general del proyecto"><img src="https://github.com/ricardo1470/VRTest/blob/main/img/2.png" align="middle" width="desired width" height="desired heigh"></a>
+---
 
-## Optimizaciones Implementadas
+## 🚀 Optimizaciones Implementadas
 
 ### Renderizado
-- **Configuración URP optimizada**:
-  - Reducción de resolución de sombras en dispositivos móviles
-  - Ajuste dinámico de distancia de dibujado según capacidad del dispositivo
-  - Desactivación de efectos post-proceso intensivos
+- URP optimizado para VR
+- Reducción de sombras
+- Draw distance adaptativo
+- Uso de GPU Instancing y Shader Graph
 
-- **GPU Instancing**:
-  - Implementación para todos los objetos repetitivos
-  - Reducción significativa de draw calls
-  - Uso de Shader Graph para efectos visuales eficientes
-
-### Carga de Assets
-- **Sistema Addressables**:
-  - Carga asíncrona y bajo demanda
-  - Liberación de memoria cuando los assets no están en uso
-  - Agrupación estratégica por frecuencia de uso
-
-- **Pruebas de Rendimiento**:
-  - Con 10 unidades: 90+ FPS en Meta Quest 2
-  - Con 100 unidades: 60-75 FPS en Meta Quest 2
-  - Con 1000 unidades: 30-45 FPS en Meta Quest 2
+### Addressables
+- Carga asíncrona
+- Liberación de memoria ociosa
+- Agrupación según frecuencia de uso
 
 ### Red
-- **Optimización de Ancho de Banda**:
-  - Uso de compresión de datos
-  - Priorización de actualizaciones por distancia
-  - Buffer adaptativo según condiciones de red
+- Compresión de datos
+- Interpolación y predicción de movimiento
+- Prioridad según distancia y relevancia
 
-- **Manejo de la Latencia**:
-  - Predicción de movimiento para avatares
-  - Buffer de suavizado para movimientos bruscos
-  - Interpolación de posiciones para transiciones naturales
+---
 
-## Pruebas y Validación
+## 🧪 Pruebas y Validación
 
 ### Pruebas Unitarias
-- Implementación de tests automatizados con Unity Test Framework
-- Cobertura de componentes críticos:
-  - Validación de formato IP
-  - Sincronización de objetos
-  - Funcionamiento de portales
+- IP válida
+- Sincronización de objetos
+- Funcionamiento de portales
 
 ### Pruebas de Rendimiento
-- Monitoreo de FPS, uso de memoria y ancho de banda
-- Pruebas en dispositivos Meta Quest 2 y Pico 4
-- Identificación de cuellos de botella y optimizaciones resultantes
 
-## Desafíos y Soluciones
+| Unidades | FPS (Meta Quest 2) |
+|---------|---------------------|
+| 10      | 90+ FPS             |
+| 100     | 60–75 FPS           |
+| 1000    | 30–45 FPS           |
 
-### Integración RPM-Netcode
-- **Problema**: Incompatibilidad entre el sistema de animación de RPM y la sincronización de red
-- **Solución**: Desarrollo de un componente personalizado para sincronizar sólo los huesos principales y utilizar animación local para detalles
+---
 
-### Sincronización de Física
-- **Problema**: Inconsistencias en la física de objetos entre clientes
-- **Solución**: Implementación de autoridad sobre objetos físicos y sistema de reconciliación para diferencias críticas
+## 🧩 Desafíos y Soluciones
 
-## Conclusiones y Trabajo Futuro
+### Integración RPM + Netcode
+- **Problema**: incompatibilidad en animaciones de huesos
+- **Solución**: sincronización de huesos principales y animación local
+
+### Física de Objetos
+- **Problema**: inconsistencias entre clientes
+- **Solución**: autoridad local y reconciliación de estado
+
+---
+
+## ✅ Conclusiones y Trabajo Futuro
 
 ### Estado Actual
-El proyecto cumple con los requisitos funcionales establecidos, demostrando:
-- Conexión multijugador funcional en red local
-- Interacción con objetos físicos sincronizados
-- Sistema de portales para navegación
-- Carga dinámica de assets mediante Addressables
+- Multijugador funcional (red local)
+- Portales y objetos físicos sincronizados
+- Addressables implementado
 
 ### Mejoras Potenciales
-- Implementación de servidor dedicado para mejorar estabilidad
-- Perfeccionamiento de la sincronización de avatares RPM
-- Expansión de la mecánica de portales con efectos de distorsión espacial
-- Sistema de persistencia de estado entre sesiones
+- Servidor dedicado
+- Mejor sincronización RPM
+- Persistencia entre sesiones
+- Efectos de distorsión en portales
 
 ### Lecciones Aprendidas
-- La importancia de priorizar la optimización desde etapas tempranas para VR
-- Los beneficios de un enfoque modular en el desarrollo de sistemas interconectados
-- La necesidad de pruebas exhaustivas en condiciones de red variables
+- Optimizar desde el inicio
+- Modularidad como clave de escalabilidad
+- Importancia de pruebas bajo red real
 
-## Instalación y Ejecución
+---
+
+## 🛠️ Instalación y Ejecución
 
 ### Requisitos
 - Unity 6.x
-- URP Package
-- XR Interaction Toolkit 2.3.0+
-- XR Plugin Management
+- URP
+- XR Toolkit 2.3+
 - Netcode for GameObjects
-- Final IK (Asset Store)
+- Final IK
 
 ### Configuración
 1. Clonar el repositorio
-2. Abrir con Unity 6.x
-3. Instalar paquetes dependientes a través del Package Manager
-4. Configurar el dispositivo XR en XR Plugin Management
+2. Abrir en Unity 6.x
+3. Instalar paquetes en el Package Manager
+4. Configurar XR Plugin Management
 
-### Construcción
-- Para PC (Modo desarrollo): Build para Windows x64
-- Para Meta Quest/Pico: Build para Android con arquitectura ARM64
+### Build
+- **PC**: Windows x64
+- **Quest/Pico**: Android ARM64
 
+---
 
-> ## contact 💬
+## 📬 Contact 💬
 
 <div align="center">
 
-<h2>
-    Contact with me<img src="https://github.com/ricardo1470/ricardo1470/blob/master/img/Handshake.gif" height="32px">
-</h2>
+### ¡Conectemos!
 
 | [<img src="https://github.com/ricardo1470/ricardo1470/blob/master/img/GitHub.png" alt="Github logo" width="34">](https://github.com/ricardo1470/README/blob/master/README.md) | [<img src="https://github.com/ricardo1470/ricardo1470/blob/master/img/email.png" alt="email logo" height="32">](mailto:ricardo.alfonso.camayo@gmail.com) | [<img src="https://github.com/ricardo1470/ricardo1470/blob/master/img/linkedin-icon.png" alt="Linkedin Logo" width="32">](https://www.linkedin.com/in/ricardo-alfonso-camayo/) | [<img src="https://github.com/ricardo1470/ricardo1470/blob/master/img/twitter.png" alt="Twitter Logo" width="30">](https://twitter.com/RICARDO1470) |
 |:---:|:---:|:---:|:---:|
 
----
+</div>
