@@ -15,6 +15,8 @@ public class SimulacionFisicaAvanzada : MonoBehaviour
     public float fuerzaImpulso = 5f;
     public int pasosFisicos = 3;
 
+    public bool desactivarInput = false;
+
 
     /// <summary>
     ///     Método de inicialización del script.
@@ -40,10 +42,17 @@ public class SimulacionFisicaAvanzada : MonoBehaviour
     /// <returns></returns>
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (desactivarInput) return;
+
+        if (EstaEspacioPresionado())
         {
             AplicarFuerza();
         }
+    }
+
+    protected virtual bool EstaEspacioPresionado()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
     }
 
     /// <summary>
@@ -109,7 +118,6 @@ public class SimulacionFisicaAvanzada : MonoBehaviour
     /// <returns></returns>
     public void AplicarFuerzaDesdeVR(Vector3 direccion)
     {
-        rb.AddForce(direccion * fuerzaImpulso, ForceMode.Impulse);
-        SimularFisicaAvanzada();
+        GetComponent<Rigidbody>().AddForce(direccion.normalized * fuerzaImpulso, ForceMode.Impulse);
     }
 }

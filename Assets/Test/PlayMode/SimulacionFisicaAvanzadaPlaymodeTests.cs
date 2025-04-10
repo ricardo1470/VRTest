@@ -17,8 +17,11 @@ public class SimulacionFisicaAvanzadaPlaymodeTests
         rb = objetoFisico.AddComponent<Rigidbody>();
         rb.useGravity = true;
 
+        simulacion.desactivarInput = true; // 👈 esto evita el error
+
         yield return null;
     }
+
 
     [UnityTest]
     public IEnumerator AplicarFuerza_Impulso_Aleatorio_Mueve_Objeto()
