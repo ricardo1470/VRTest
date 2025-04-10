@@ -1,0 +1,5 @@
+C:/Users/cresp/OneDrive/Documentos/dreamweaverstudio/testVR/VRTest/.utmp/RelWithDebInfo/4d2v5t1a/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/cresp/OneDrive/Documentos/dreamweaverstudio/testVR/VRTest/.utmp/RelWithDebInfo/4d2v5t1a/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/cresp/OneDrive/Documentos/dreamweaverstudio/testVR/VRTest/.utmp/RelWithDebInfo/4d2v5t1a/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/cresp/OneDrive/Documentos/dreamweaverstudio/testVR/VRTest/.utmp/RelWithDebInfo/4d2v5t1a/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/cresp/OneDrive/Documentos/dreamweaverstudio/testVR/VRTest/.utmp/RelWithDebInfo/4d2v5t1a/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
